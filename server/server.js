@@ -148,7 +148,7 @@ app.get('/api/product/brands', (req, res) => {
 
 
 //================================
-//             USERSs
+//             USERS
 //================================
 
 app.get('/api/users/auth', auth, (req, res) => {

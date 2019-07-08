@@ -71,7 +71,7 @@ class Login extends Component {
   render() {
     const {formdata, formError} = this.state
     const { login } = this.props
-    console.log('testttttt')
+    
     if (login && login.loginSuccess) {
       return <Redirect to='/user/dashboard' />
     }
