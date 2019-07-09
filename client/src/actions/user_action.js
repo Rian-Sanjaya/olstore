@@ -2,7 +2,8 @@ import axios from 'axios'
 import {USER_ROUTES, PRODUCT_ROUTES} from '../components/utils/misc'
 import {
   LOGIN_USER,
-  REGISTER_USER
+  REGISTER_USER,
+  AUTH_USER
 } from './types'
 
 export function loginUser(dataToSubmit) {
@@ -26,6 +27,20 @@ export function registerUser(dataToSubmit) {
     .then( res => {
       return dispatch({
         type: REGISTER_USER,
+        payload: res
+      })
+    })
+    .catch( err => console.error(err) )
+  }
+}
+
+export function auth() {
+  return (dispatch) => {
+    axios.get(`${USER_ROUTES}/auth`)
+    .then( res => res.data )
+    .then( res => {
+      return dispatch({
+        type: AUTH_USER,
         payload: res
       })
     })

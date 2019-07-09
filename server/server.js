@@ -152,6 +152,7 @@ app.get('/api/product/brands', (req, res) => {
 //================================
 
 app.get('/api/users/auth', auth, (req, res) => {
+  // console.log('isi req: ', req)
   res.status(200).json({
     isAdmin: req.user.role === 0 ? false : true,
     isAuth: true,

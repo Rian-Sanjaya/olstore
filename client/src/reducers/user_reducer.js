@@ -1,10 +1,27 @@
 import {
   LOGIN_USER,
-  REGISTER_USER
+  REGISTER_USER,
+  AUTH_USER
 } from '../actions/types'
 
-const user = (state={}, action) => {
+const initialState = {
+  authUser: {
+    loading: true
+  }
+}
+
+const user = (state=initialState, action) => {
   switch(action.type) {
+    case AUTH_USER:
+      return {
+        ...state,
+        authUser: {
+          ...state.authUser,
+          loading: false,
+          ...action.payload
+        }
+      }
+
     case LOGIN_USER:
       return {
         ...state,
