@@ -1,17 +1,20 @@
 import React from 'react'
+// import { connect } from 'react-redux'
 import MyButton from '../utils/button'
 import UserDashboardSidebar from '../../hoc/user'
 
-const UserDashboard = () => {
+const UserDashboard = (props) => {
+  const { authUser } = props
+
   return (
     <UserDashboardSidebar>
       <div>
         <div className="user_nfo_panel">
           <h1>User information</h1>
           <div>
-            <span>name</span>
-            <span>lastname</span>
-            <span>email</span>
+            <span>{authUser.name}</span>
+            <span>{authUser.lastname}</span>
+            <span>{authUser.email}</span>
           </div>
           <MyButton
             type="default"
@@ -20,12 +23,28 @@ const UserDashboard = () => {
           />
         </div>
 
-        <div className="user_nfo_panel">
-          <h1>History purchases</h1>            
-        </div>
+        {
+          authUser.history ? 
+            <div className="user_nfo_panel">
+              <h1>History purchases</h1>
+              <div className='user_product_block_wrapper'>
+                History
+              </div>      
+            </div>
+          : null
+        }
+
       </div>
     </UserDashboardSidebar>
   )
 }
+
+// const mapStateToProps = (state, props) => {
+//   return {
+//     authUser: state.user.authUser
+//   }
+// }
+
+// export default connect(mapStateToProps)(UserDashboard)
 
 export default UserDashboard

@@ -1,7 +1,8 @@
 import {
   LOGIN_USER,
   REGISTER_USER,
-  AUTH_USER
+  AUTH_USER,
+  LOGOUT_USER
 } from '../actions/types'
 
 const initialState = {
@@ -32,6 +33,12 @@ const user = (state=initialState, action) => {
       return {
         ...state,
         register: action.payload
+      }
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        logout: action.payload 
       }
 
     default:

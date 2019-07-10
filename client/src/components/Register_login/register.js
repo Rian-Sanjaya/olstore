@@ -5,7 +5,7 @@ import FormField from '../utils/Form/FormField'
 import { update, generateData, isFormValid } from '../utils/Form/formAction'
 import { registerUser } from '../../actions/user_action'
 // import Modal from '@material-ui/core/Modal'
-// import Dialog from '@material-ui/core/Dialog'
+import Dialog from '@material-ui/core/Dialog'
 
 class Register extends Component {
   state = {
@@ -131,21 +131,22 @@ class Register extends Component {
   render() {
     const { formError, formErrorMsg } = this.state
     const { register } = this.props
+    const openDialog = register ? register.success : false
 
     if (register && register.success) {
       setTimeout( () => {
         return this.props.history.push('/register_login')
-      }, 1000)
+      }, 2000)
     }
 
     return (
       <div className='page_wrapper'>
-        {/* <Modal open={false} onClose={() => {}}>
+        <Dialog open={openDialog}>
           <div className='dialog_alert'>
             <div>Register Success</div>
             <div>You will be redirected to the LOGIN page</div>
           </div>
-        </Modal> */}
+        </Dialog>
 
         <div className='container'>
           <div className='register_login_container'>

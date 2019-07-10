@@ -3,7 +3,8 @@ import {USER_ROUTES, PRODUCT_ROUTES} from '../components/utils/misc'
 import {
   LOGIN_USER,
   REGISTER_USER,
-  AUTH_USER
+  AUTH_USER,
+  LOGOUT_USER
 } from './types'
 
 export function loginUser(dataToSubmit) {
@@ -17,6 +18,20 @@ export function loginUser(dataToSubmit) {
       })
     })
     .catch( err => console.error(err) )
+  }
+}
+
+export function logoutUser() {
+  return(dispatch) => {
+    axios.get(`${USER_ROUTES}/logout`)
+    .then( res => res.data )
+    .then( res => {
+      return dispatch({
+        type: LOGOUT_USER,
+        payload: res
+      })
+    })
+    .catch( err => console.log(err) )
   }
 }
 
