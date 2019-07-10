@@ -110,9 +110,9 @@ header .logo {
   padding: 11px 0px;
 }
 
-/* header a {
+header a {
   margin-left: 20px;
-} */
+}
 
 header .container {
   display: flex;
@@ -143,7 +143,7 @@ header .container .right .top {
   border-bottom: 1px solid #ffffff;
 }
 
-/* header .cart_link {
+header .cart_link {
   display: inline-block;
   position: relative;
 }
@@ -158,11 +158,12 @@ header .cart_link span {
   padding: 0px 7px 2px 7px;
   font-size: 12px;
 }
+
 header .log_out_link {
   cursor: pointer;
   display: inline-block;
   margin-left: 20px;
-} */
+}
 
 /*============================
             FOOTER

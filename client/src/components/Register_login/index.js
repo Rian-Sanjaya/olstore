@@ -3,6 +3,7 @@ import MyButton from '../utils/button'
 import Login from './login'
 
 const RegisterLogin = () => {
+  console.log('register login')
   return (
     <div className='page_wrapper'>
       <div className='container'>

@@ -31,6 +31,7 @@ export function logoutUser() {
         payload: res
       })
     })
+    .then( res => dispatch({ type: 'RESET_STATE' }))
     .catch( err => console.log(err) )
   }
 }

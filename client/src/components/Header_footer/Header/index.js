@@ -107,7 +107,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log('isi props: ', this.props)
     const { userLinks, publicLinks } = this.state
 
     return (
