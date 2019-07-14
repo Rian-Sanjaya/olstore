@@ -2,7 +2,8 @@ import {
   LOGIN_USER,
   REGISTER_USER,
   AUTH_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  ADD_TO_CART_USER
 } from '../actions/types'
 
 const initialState = {
@@ -39,6 +40,15 @@ const user = (state=initialState, action) => {
       return {
         ...state,
         logout: action.payload 
+      }
+
+    case ADD_TO_CART_USER:
+      return {
+        ...state,
+        authUser: {
+          ...state.authUser,
+          cart: action.payload
+        }
       }
 
     default:

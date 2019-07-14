@@ -84,12 +84,12 @@ app.get('/api/product/articles', (req,res) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
   Product.
-  find().
-  populate('brand').
-  populate('wood').
-  sort([[sortBy,order]]).
-  limit(limit).
-  exec((err,articles)=>{
+  find()
+  .populate('brand')
+  .populate('wood')
+  .sort([[sortBy,order]])
+  .limit(limit)
+  .exec((err,articles)=>{
       if(err) return res.status(400).send(err);
       res.status(200).send(articles)
   })

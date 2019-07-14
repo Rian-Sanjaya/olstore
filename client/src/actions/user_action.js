@@ -1,10 +1,11 @@
 import axios from 'axios'
-import {USER_ROUTES, PRODUCT_ROUTES} from '../components/utils/misc'
+import {USER_ROUTES} from '../components/utils/misc'
 import {
   LOGIN_USER,
   REGISTER_USER,
   AUTH_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  ADD_TO_CART_USER
 } from './types'
 
 export function loginUser(dataToSubmit) {
@@ -57,6 +58,20 @@ export function auth() {
     .then( res => {
       return dispatch({
         type: AUTH_USER,
+        payload: res
+      })
+    })
+    .catch( err => console.error(err) )
+  }
+}
+
+export function addToCart(_id) {
+  return (dispatch) => {
+    axios.post(`${USER_ROUTES}/addToCart?productId=${_id}`)
+    .then( res => res.data )
+    .then( res => {
+      return dispatch({
+        type: ADD_TO_CART_USER,
         payload: res
       })
     })
