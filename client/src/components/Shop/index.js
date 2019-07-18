@@ -5,13 +5,23 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faBars from '@fortawesome/fontawesome-free-solid/faBars'
 import faTh from '@fortawesome/fontawesome-free-solid/faTh'
 import CollapseCheckbox from '../utils/collapseCheckbox'
+import CollapseRadio from '../utils/collapseRadio'
+import { getBrands, getWoods } from '../../actions/product_action'
+import { frets, price } from './fixed_filters'
 
 class Shop extends Component {
   state = {
     grid: ''
   }
 
+  componentDidMount() {
+    this.props.getBrands()
+    this.props.getWoods()
+  }
+
   render() {
+    const { product } = this.props
+
     return (
       <div>
         <PageTop 
@@ -22,22 +32,28 @@ class Shop extends Component {
 
             <div className='left'>
               <CollapseCheckbox
-                initState={true}
+                initOpen={true}
                 title="Brands"
-                // list={product.brands}
+                list={product.brands}
                 handleFilters={(filters)=> this.handleFilters(filters,'brand')}
               />
               <CollapseCheckbox
-                initState={false}
+                initOpen={false}
                 title="Frets"
-                // list={frets}
+                list={frets}
                 handleFilters={(filters)=> this.handleFilters(filters,'frets')}
               />
               <CollapseCheckbox
-                initState={false}
+                initOpen={false}
                 title="Wood"
-                // list={product.woods}
+                list={product.woods}
                 handleFilters={(filters)=> this.handleFilters(filters,'wood')}
+              />
+              <CollapseRadio
+                initOpen={true}
+                title='Price'
+                list={price}
+                handleFilters={ (filters) => this.handleFilters(filters, 'price')}
               />
             </div>
 
@@ -52,6 +68,7 @@ class Shop extends Component {
                   </div>
                   <div
                     className={`grid_btn ${!this.state.grid ? '' : 'active'}`}
+                    onClick={ () => {} }
                   >
                     <FontAwesomeIcon icon={faBars} />
                   </div>
@@ -70,4 +87,15 @@ class Shop extends Component {
   }
 }
 
-export default connect()(Shop)
+const mapStateToProps = (state, props) => {
+  return {
+    product: state.product
+  }
+}
+
+const mapActionsToProps = {
+  getBrands,
+  getWoods
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Shop)
