@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   GET_PRODUCTS_BY_SELL,
   GET_PRODUCTS_BY_ARRIVAL,
+  GET_PRODUCTS_TO_SHOP,
   GET_BRANDS,
   GET_WOODS
 } from './types'
@@ -32,6 +33,48 @@ export function getProductByArrival() {
       })
     })
     .catch( err => console.error(err) )
+  }
+}
+
+export function getProductsToShop(skip, limit, filters=[], previousState=[]) {
+  const data = {
+    limit,
+    skip,
+    filters
+  }
+
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${PRODUCT_ROUTES}/shop`, data)
+      .then( res => {
+        let newState = [
+          ...previousState,
+          ...res.data.articles
+        ]
+  
+        return {
+          size: res.data.size,
+          articles: newState
+        }
+      })
+      .then( res => {
+        // return dispatch({
+        //   type: GET_PRODUCTS_TO_SHOP,
+        //   payload: res
+        // })
+
+        dispatch({
+          type: GET_PRODUCTS_TO_SHOP,
+          payload: res
+        })
+
+        resolve()
+      })
+      .catch( err => {
+        console.log(err)
+        reject(err) 
+      })
+    })
   }
 }
 
