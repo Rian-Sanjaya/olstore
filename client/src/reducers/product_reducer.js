@@ -2,6 +2,8 @@ import {
   GET_PRODUCTS_BY_SELL,
   GET_PRODUCTS_BY_ARRIVAL,
   GET_PRODUCTS_TO_SHOP,
+  GET_PRODUCT_DETAIL,
+  CLEAR_PRODUCT_DETAIL,
   ADD_PRODUCT,
   CLEAR_PRODUCT,
   GET_BRANDS,
@@ -24,6 +26,12 @@ export default function(state={}, action) {
         toShop: action.payload.articles,
         toShopSize: action.payload.size
       }
+
+    case GET_PRODUCT_DETAIL:
+      return { ...state, prodDetail: action.payload }
+
+    case CLEAR_PRODUCT_DETAIL:
+      return { ...state, prodDetail: action.payload }
 
     case ADD_PRODUCT:
       return {

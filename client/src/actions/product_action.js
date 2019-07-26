@@ -3,6 +3,8 @@ import {
   GET_PRODUCTS_BY_SELL,
   GET_PRODUCTS_BY_ARRIVAL,
   GET_PRODUCTS_TO_SHOP,
+  GET_PRODUCT_DETAIL,
+  CLEAR_PRODUCT_DETAIL,
   ADD_PRODUCT,
   CLEAR_PRODUCT,
   GET_BRANDS,
@@ -210,5 +212,32 @@ export function addWood(dataToSubmit, existingWoods) {
         reject(err)
       })
     })
+  }
+}
+
+export function getProductDetail(id) {
+  return (dispatch) => {
+    return new Promise(( resolve, reject ) => {
+      axios.get(`${PRODUCT_ROUTES}/articles_by_id?id=${id}&type=single`)
+      .then( res => {
+        dispatch({
+          type: GET_PRODUCT_DETAIL,
+          payload: res.data[0]
+        })
+
+        resolve(res.data[0])
+      })
+      .catch( err => {
+        console.error(err)
+        reject(err) 
+      })
+    })
+  }
+}
+
+export function clearProductDetail() {
+  return {
+    type: CLEAR_PRODUCT_DETAIL,
+    payload: ''
   }
 }
