@@ -13,6 +13,7 @@ import ProductDetail from './components/Product'
 import UserDashboard from './components/User'
 import AddProduct from './components/User/Admin/add_product'
 import ManageCategories from './components/User/Admin/manage_categories';
+import UserCart from './components/User/cart'
 
 const Routes = () => {
   return (
@@ -28,6 +29,7 @@ const Routes = () => {
           <Route path='/user/dashboard' component={Auth(UserDashboard, true)} />
           <Route path='/admin/add_product' component={Auth(AddProduct, true)} />
           <Route path='/admin/manage_categories' component={Auth(ManageCategories, true)} />
+          <Route path='/user/cart' component={Auth(UserCart, true)} />
         </Switch>
       </Layout>
     </Router>

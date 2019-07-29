@@ -37,6 +37,11 @@ a {
   background: #272723;
 }
 
+.dialog_alert {
+  padding: 51px;
+  font-size: 30px;
+}
+
 .load_more_container {
   clear: both;
   margin-bottom: 50px;
@@ -54,10 +59,40 @@ a {
   margin: 0 auto;
 }
 
+.no_result {
+  font-size: 40px;
+  color: #999592;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.not_found_container {
+  font-size: 70px;
+  text-align: center;
+  padding-top: 70px;
+  color: #dddddd;
+}
+
 .clear:after {
   content: '';
   display: block;
   clear: both;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
 
 /*============================

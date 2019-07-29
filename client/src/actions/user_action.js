@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {USER_ROUTES} from '../components/utils/misc'
+import {USER_ROUTES, PRODUCT_ROUTES} from '../components/utils/misc'
 import {
   LOGIN_USER,
   REGISTER_USER,
@@ -76,5 +76,24 @@ export function addToCart(_id) {
       })
     })
     .catch( err => console.error(err) )
+  }
+}
+
+export function getCartItems(cartItems, userCart) {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios.get(`${PRODUCT_ROUTES}/articles_by_id?id=${cartItems}&type=array`)
+      .then( res => {
+        userCart.forEach( item => {
+          res.data.forEach( (k, i) => {
+            if (item.id === k._id) {
+              res.data[i].quantity = item.quantity
+            }
+          })
+        })
+        console.log({cart: userCart, data: res.data})
+        return res.data
+      })
+    })
   }
 }

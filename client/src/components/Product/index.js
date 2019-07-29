@@ -4,6 +4,7 @@ import PageTop from '../utils/page_top'
 import { getProductDetail, clearProductDetail } from '../../actions/product_action'
 import ProdImg from './prodImg'
 import ProdNfo from './prodNfo'
+import { addToCart } from '../../actions/user_action'
 
 class ProductDetail extends Component {
   componentDidMount() {
@@ -18,6 +19,10 @@ class ProductDetail extends Component {
 
   componentWillUnmount() {
     this.props.clearProductDetail()
+  }
+
+  addToCartHandler(id) {
+    this.props.addToCart(id)
   }
 
   render() {
@@ -36,7 +41,7 @@ class ProductDetail extends Component {
 
                 <div className='right'>
                   <ProdNfo
-                    // addToCart={(id) => this.addToCartHandler(id)}
+                    addToCart={(id) => this.addToCartHandler(id)}
                     detail={this.props.product.prodDetail}
                   />
                 </div>
@@ -58,7 +63,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = {
   getProductDetail,
-  clearProductDetail
+  clearProductDetail,
+  addToCart
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ProductDetail)
