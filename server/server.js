@@ -71,19 +71,6 @@ app.post('/api/product/shop', (req, res) => {
   })
 })
 
-app.post('/api/product/article', auth, admin, (req, res) => {
-  const product = new Product(req.body)
-
-  product.save((err, doc) => {
-    if (err) return res.json({success: false, err})
-
-    res.status(200).json({
-      success: true,
-      article: doc
-    })
-  })
-})
-
 // url / route by query
 // /api/product/article?id=articleid1,articleid2,articleid3&type=array
 app.get('/api/product/articles_by_id', (req, res) => {
@@ -107,7 +94,20 @@ app.get('/api/product/articles_by_id', (req, res) => {
   exec((err, docs) => {
     if (err) return res.status(400).send(err)
 
-    res.status(200).send(docs)
+    return res.status(200).send(docs)
+  })
+})
+
+app.post('/api/product/article', auth, admin, (req, res) => {
+  const product = new Product(req.body)
+
+  product.save((err, doc) => {
+    if (err) return res.json({success: false, err})
+
+    res.status(200).json({
+      success: true,
+      article: doc
+    })
   })
 })
 

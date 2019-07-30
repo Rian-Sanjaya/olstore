@@ -118,6 +118,12 @@ button {
   font-size: 16px;
 }
 
+.error_label {
+  color: #F44336;
+  display:block;
+  font-size: 15px;
+}
+
 textarea {
   width: 100%;
   height: 51px;
@@ -131,12 +137,6 @@ textarea {
 .form_divider {
   border-bottom: 3px solid #999592;
   margin: 40px 8px;
-}
-
-.error_label {
-  color: #f44336;
-  display: block;
-  font-size: 15px;
 }
 
 .label_inputs {
@@ -216,6 +216,22 @@ select {
 .add_to_cart_link:hover {
     background: #aaaaaa;
     color: #ffff;
+}
+
+.add_to_cart_link {
+  color: #6b6b6b;
+  background: #d9d9d9;
+}
+.add_to_cart_link svg {
+  margin-right: 10px;
+}
+
+.action_button {
+  text-transform: uppercase;
+  padding: 10px;
+  display: table;
+  background: #e1ddc3;
+  margin-top: 10px;
 }
 
 /*============================
@@ -451,6 +467,55 @@ header .log_out_link {
 .card_item_wrapper .actions .button_wrapp:nth-child(1) {
   flex-grow: 1;
   padding-right: 10px;
+}
+
+.card_item_wrapper.grid_bars {
+  float: none;
+  width: 100%;
+  display: flex;
+}
+
+.card_item_wrapper.grid_bars .image {
+  width: 420px;
+  height: 211px;
+  border: none;
+
+}
+
+.card_item_wrapper.grid_bars .action_container {
+  flex-grow: 1;
+  border: 1px solid #e6e6e6;
+}
+
+.card_item_wrapper.grid_bars .description{
+  clear:both;
+  padding: 0px 25px;
+  border-top: 1px solid #eeeeee;
+}
+
+.card_item_wrapper.grid_bars .tags{
+  border-bottom: 0px;
+  padding: 5px 20px;
+}
+
+.card_item_wrapper.grid_bars .tags .brand {
+  font-size: 21px;
+}
+
+
+.card_item_wrapper.grid_bars .tags .brand,
+.card_item_wrapper.grid_bars .tags .name {
+  float:left
+}
+
+.card_item_wrapper.grid_bars .tags .price {
+  float:right;
+}
+
+.card_item_wrapper.grid_bars .actions {
+  clear:both;
+  float:right;
+  padding: 10px 20px 0px 15px;
 }
 
 /*============================
@@ -695,6 +760,40 @@ footer .business_nfo .nfo {
   display: block;
   font-size: 18px;
   font-weight: 300;
+}
+
+.user_product_block {
+  display: flex;
+  flex-wrap: wrap;
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ebebeb;
+}
+
+.user_product_block .item {
+  flex-grow: 1;
+}
+
+.user_product_block .item .image{
+  height: 125px;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  margin-right: 10px;
+}
+.user_product_block .item.btn {
+  width: 0px;
+}
+
+
+.user_product_block .cart_remove_btn {
+  cursor: pointer;
+  background: #F44336;
+  display: inline-block;
+  padding: 5px 10px;
+  color: #ffffff;
+  margin-top: 50px;
 }
 
 /*============================

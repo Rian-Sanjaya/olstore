@@ -5,7 +5,9 @@ import {
   REGISTER_USER,
   AUTH_USER,
   LOGOUT_USER,
-  ADD_TO_CART_USER
+  ADD_TO_CART_USER,
+  GET_CART_ITEMS_USER,
+  REMOVE_CART_ITEM_USER
 } from './types'
 
 export function loginUser(dataToSubmit) {
@@ -91,8 +93,51 @@ export function getCartItems(cartItems, userCart) {
             }
           })
         })
-        console.log({cart: userCart, data: res.data})
+        // console.log({cart: userCart, data: res.data})
         return res.data
+      })
+      .then( res => {
+        dispatch({
+          type: GET_CART_ITEMS_USER, 
+          payload: res
+        })
+
+        resolve()
+      })
+      .catch( err => {
+        console.log(err)
+        reject(err) 
+      })
+    })
+  }
+}
+
+export function removeCartItem(id) {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios.get(`${USER_ROUTES}/removeFromCart?_id=${id}`)
+      .then( res => {
+        res.data.cart.forEach( item => {
+          res.data.cartDetail.forEach((k, i) => {
+            if (item.id === k._id) {
+              res.data.cartDetail[i].quantity = item.quantity
+            }
+          })
+        })
+
+        return res.data
+      })
+      .then( res => {
+        dispatch({
+          type: REMOVE_CART_ITEM_USER,
+          payload: res
+        })
+        
+        resolve()
+      })
+      .catch( err => {
+        console.error(err)
+        reject(err)
       })
     })
   }
