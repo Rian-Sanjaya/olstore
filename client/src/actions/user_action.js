@@ -7,7 +7,9 @@ import {
   LOGOUT_USER,
   ADD_TO_CART_USER,
   GET_CART_ITEMS_USER,
-  REMOVE_CART_ITEM_USER
+  REMOVE_CART_ITEM_USER,
+  UPDATE_DATA_USER,
+  CLEAR_UPDATE_USER_DATA
 } from './types'
 
 export function loginUser(dataToSubmit) {
@@ -139,6 +141,38 @@ export function removeCartItem(id) {
         console.error(err)
         reject(err)
       })
+    })
+  }
+}
+
+export function updateUserData(dataToSubmit) {
+  return (dispatch) => {
+    return new Promise( (resolve, reject) => {
+      axios.post(`${USER_ROUTES}/update_profile`, dataToSubmit)
+      .then( res => {
+        return res.data
+      })
+      .then( res => {
+        dispatch({
+          type: UPDATE_DATA_USER,
+          payload: res
+        })
+
+        resolve()
+      })
+      .catch( err => {
+        console.error(err)
+        reject(err)
+      })
+    })
+  }
+}
+
+export function clearUpdateUser() {
+  return (dispatch) => {
+    return dispatch({
+      type: CLEAR_UPDATE_USER_DATA,
+      payload: ''
     })
   }
 }

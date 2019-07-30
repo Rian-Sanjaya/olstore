@@ -105,4 +105,6 @@ export const populateFields = (formData, fields) => {
     formData[key].touched = true
     formData[key].validationMessage = ''
   }
+
+  return formData
 }
