@@ -9,7 +9,9 @@ export function getSiteData() {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       axios.get(`${SITE_ROUTES}/site_data`)
-      .then( res => res.data )
+      .then( res => {
+        return res.data 
+      })
       .then( res => {
         dispatch({
           type: GET_SITE_DATA,
@@ -26,6 +28,7 @@ export function getSiteData() {
 }
 
 export function updateSiteData(dataToSubmit) {
+  // console.log('isi dataToSubmit: ', {dataToSubmit: dataToSubmit})
   return (dispatch) => {
     return new Promise( (resolve, reject) => {
       axios.post(`${SITE_ROUTES}/site_data`, dataToSubmit)

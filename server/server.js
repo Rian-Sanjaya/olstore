@@ -3,9 +3,15 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const formidable = require('express-formidable')
 const cloudinary = require('cloudinary')
+const SHA1 = require('crypto-js/sha1')
+const multer = require('multer')
+const moment = require('moment')
+const fs = require('fs')
+const path = require('path')
 
 const app = express()
 const mongoose = require('mongoose')
+const async = require('async')
 require('dotenv').config()
 
 mongoose.Promise = global.Promise
@@ -23,6 +29,7 @@ const { User } = require('./models/user')
 const { Brand } = require('./models/brand')
 const { Wood } = require('./models/wood')
 const { Product } = require('./models/product')
+const { Site } = require('./models/site')
 
 // Middlewares
 const { auth } = require('./middleware/auth')
@@ -369,6 +376,33 @@ app.post('/api/users/update_profile',auth,(req, res) => {
     }
   );
 });
+
+//=================================
+//              SITE
+//=================================
+
+app.get('/api/site/site_data', (req, res) => {
+  Site.find({}, (err, site) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).send(site[0].siteInfo)
+  });
+});
+
+app.post('/api/site/site_data', auth, admin, (req, res) => {
+  Site.findOneAndUpdate(
+      { name: 'Site'},
+      { "$set": { siteInfo: req.body }},
+      { new: true },
+      (err, doc) => {
+          if (err) return res.json({ success: false, err });
+          return res.status(200).send({
+              success: true,
+              siteInfo: doc.siteInfo
+          })
+      }
+  )
+})
+
 
 const port = process.env.PORT || 3002
 

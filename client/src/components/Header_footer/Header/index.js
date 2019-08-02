@@ -114,7 +114,7 @@ class Header extends Component {
         <div className='container'>
           <div className='left'>
             <div className='logo'>
-              Waves
+              OLStore
             </div>
           </div>
 

@@ -1,16 +1,20 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faCompass from '@fortawesome/fontawesome-free-solid/faCompass'
 import faPhone from '@fortawesome/fontawesome-free-solid/faPhone'
 import faClock from '@fortawesome/fontawesome-free-solid/faClock'
 import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope'
 
-const Footer = () => {
+const Footer = (props) => {
+
+  const siteData = props.site.siteData ? props.site.siteData[0] : {}
+
   return (
     <footer className='bck_b_dark'>
       <div className='container'>
         <div className='logo'>
-          Waves
+          OLStore
         </div>
 
         <div className='wrapper'>
@@ -24,7 +28,7 @@ const Footer = () => {
                 />
                 <div className="nfo">
                     <div>Address</div>
-                    <div>123 Street</div>
+                    <div>{siteData.address}</div>
                 </div>
               </div>
               <div className="tag">
@@ -34,7 +38,7 @@ const Footer = () => {
                 />
                 <div className="nfo">
                     <div>Phone</div>
-                    <div>021-8763645</div>
+                    <div>{siteData.phone}</div>
                 </div>
               </div>
               <div className="tag">
@@ -44,7 +48,7 @@ const Footer = () => {
                 />
                 <div className="nfo">
                     <div>Working hours</div>
-                    <div>Mon-Friday 09-18:00</div>
+                    <div>{siteData.hours}</div>
                 </div>
               </div>
               <div className="tag">
@@ -54,7 +58,7 @@ const Footer = () => {
                 />
                 <div className="nfo">
                     <div>Email</div>
-                    <div>john@email.com</div>
+                    <div>{siteData.email}</div>
                 </div>
               </div>
             </div>
@@ -73,4 +77,10 @@ const Footer = () => {
   )
 }
 
-export default Footer
+const mapStateToProps = (state, props) => {
+  return {
+    site: state.site
+  }
+}
+
+export default connect(mapStateToProps)(Footer)

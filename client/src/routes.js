@@ -17,6 +17,8 @@ import UserCart from './components/User/cart'
 import UpdateProfile from './components/User/update_profile'
 import ManageSite from './components/User/Admin/manage_site'
 
+import PageNotFound from './components/utils/page_not_found'
+
 const Routes = () => {
   return (
     <Router>
@@ -34,6 +36,7 @@ const Routes = () => {
           <Route path='/admin/add_product' component={Auth(AddProduct, true)} />
           <Route path='/admin/manage_categories' component={Auth(ManageCategories, true)} />
           <Route path='/admin/site_info' component={Auth(ManageSite, true)} />
+          <Route component={Auth(PageNotFound)} />
         </Switch>
       </Layout>
     </Router>

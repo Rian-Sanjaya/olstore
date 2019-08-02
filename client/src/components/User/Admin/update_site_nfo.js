@@ -120,7 +120,6 @@ class UpdateSiteNfo extends Component {
   componentDidMount(){
     this.props.getSiteData()
     .then( () => {
-      console.log(this.props.site.siteData[0]);
       const newFormData = populateFields(this.state.formdata, this.props.site.siteData[0]);
       this.setState({
         formdata: newFormData

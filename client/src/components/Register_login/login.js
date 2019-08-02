@@ -103,7 +103,10 @@ class Login extends Component {
             : null
           }
 
-          <button onClick={(event)=> this.submitForm(event)}>
+          {/* <button onClick={(event)=> this.submitForm(event)}>
+              Log in
+          </button> */}
+          <button type='submit'>
               Log in
           </button>
         </form>
