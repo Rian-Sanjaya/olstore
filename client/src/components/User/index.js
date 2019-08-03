@@ -22,7 +22,7 @@ const UserDashboard = (props) => {
           />
         </div>
 
-        {
+        {/* {
           authUser.history ? 
             <div className="user_nfo_panel">
               <h1>History purchases</h1>
@@ -31,7 +31,7 @@ const UserDashboard = (props) => {
               </div>      
             </div>
           : null
-        }
+        } */}
 
       </div>
     </UserDashboardSidebar>
