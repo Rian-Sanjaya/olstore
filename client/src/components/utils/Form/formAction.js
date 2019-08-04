@@ -9,9 +9,13 @@ export const validate = (element, formdata= []) => {
   }
 
   if(element.validation.confirm){
-      const valid = element.value.trim() === formdata[element.validation.confirm].value;
+      // console.log(`element: ${element.validation.confirm}`)
+      let valid = true
+      if (element.validation.confirm !== 'confirmPassword') {
+        valid = element.value.trim() === formdata[element.validation.confirm].value;
+      }
       const message = `${!valid ? 'Passwords do not match' : ''}`;
-      error = !valid ? [valid,message] : {error};
+      error = !valid ? [valid,message] : error;
   }
 
   if(element.validation.required){
@@ -35,7 +39,7 @@ export const update = (element, formdata, formName ) => {
 
   if(element.blur){
       let validData = validate(newElement, formdata);
-      
+      // console.log('validData: ', validData)
       newElement.valid = validData[0];
       newElement.validationMessage = validData[1];
   }
@@ -62,6 +66,7 @@ export const isFormValid = (formdata, formName) => {
   let formIsValid = true;
 
   for(let key in formdata){
+      // console.log(`key: ${key}, valid: ${formdata[key].valid}`)
       formIsValid = formdata[key].valid && formIsValid
   }
   return formIsValid;

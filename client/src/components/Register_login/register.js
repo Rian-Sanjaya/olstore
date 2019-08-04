@@ -95,6 +95,8 @@ class Register extends Component {
   }
 
   updateForm(element) {
+    // console.log('element: ', {element})
+
     const newFormdata = update(element, this.state.formdata, 'register')
     
     this.setState({
@@ -117,6 +119,8 @@ class Register extends Component {
           formErrorMsg: 'Password do not match'
         })
       } else {
+        dataToSubmit.role = 1   // make all user admin
+        // console.log('isi dataToSubmit: ', dataToSubmit)
         this.props.registerUser(dataToSubmit)
       }
 

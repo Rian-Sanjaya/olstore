@@ -15,8 +15,8 @@ const async = require('async')
 require('dotenv').config()
 
 mongoose.Promise = global.Promise
-// mongoose.connect(process.env.DATABASE)
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.DATABASE)
+// mongoose.connect(process.env.MONGODB_URI)
 
 // for url by query string (/api/product/article?id=article_id&type=single)
 app.use(bodyParser.urlencoded({extended: true}))
