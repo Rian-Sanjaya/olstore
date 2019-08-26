@@ -8,6 +8,7 @@ const multer = require('multer')
 const moment = require('moment')
 const fs = require('fs')
 const path = require('path')
+// const mailer = require('nodemailer')
 
 const app = express()
 const mongoose = require('mongoose')
@@ -15,8 +16,8 @@ const async = require('async')
 require('dotenv').config()
 
 mongoose.Promise = global.Promise
-// mongoose.connect(process.env.DATABASE)
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.DATABASE)
+// mongoose.connect(process.env.MONGODB_URI)
 
 // for url by query string (/api/product/article?id=article_id&type=single)
 app.use(bodyParser.urlencoded({extended: true}))
@@ -43,6 +44,31 @@ const { Site } = require('./models/site')
 const { auth } = require('./middleware/auth')
 const { admin } = require('./middleware/admin')
 
+// UTILS
+const { sendMail } = require('./utils/index')
+
+// const smtpTransport = mailer.createTransport({
+//   service: "Gmail",
+//   auth: {
+//     user: "myolstore.sj@gmail.com",
+//     pass: ""
+//   }
+// })
+
+// const mail = {
+//   from: "OLStore <myolstore.sj@gmail.com>",
+//   to: "rian.sj@gmail.com",
+//   subject: "Send text email",
+//   text: "Testing our olstore mails",
+//   html: "<b>Hellow guys this works</b>"
+// }
+
+// smtpTransport.sendMail(mail, function(error, res) {
+//   if (error) console.log(error)
+//   else console.log('email sent')
+
+//   smtpTransport.close()
+// })
 
 //================================
 //             PRODUCTS
@@ -237,6 +263,8 @@ app.post('/api/users/register', (req, res) => {
 
   user.save((err, doc) => {
     if (err) return res.json({success: false, message: err.message})
+
+    sendMail(doc.email, doc.name, null, "welcome")
 
     return res.status(200).json({
       success: true,
