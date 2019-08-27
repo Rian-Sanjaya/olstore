@@ -1,5 +1,7 @@
 const mailer = require('nodemailer')
 const { welcome } = require('./welcome_template')
+const { resetPass } = require('./resetpass_template')
+require('dotenv').config()
 
 const getEmailData = (to, name, token, template, actionData) => {
   let data = null
@@ -13,6 +15,14 @@ const getEmailData = (to, name, token, template, actionData) => {
         html: welcome()
       }
       break
+
+    case 'reset_password':
+      data = {
+        from: "OLStore <myolstore.sj@gmail.com>",
+        to,
+        subject: `Hey ${name}, reset your password`,
+        html: resetPass(actionData)
+      }
 
     default:
       data

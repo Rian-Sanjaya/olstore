@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, withRouter} from 'react-router-dom'
 import FormField from '../utils/Form/FormField'
 import { update, generateData, isFormValid } from '../utils/Form/formAction'
 import {loginUser} from '../../actions/user_action'
@@ -109,6 +109,13 @@ class Login extends Component {
           <button type='submit'>
               Log in
           </button>
+
+          <button
+            style={{ marginLeft: '10px' }}
+            onClick={ () => this.props.history.push('/forgot_pass') }
+          >
+            Forgot my password
+          </button>
         </form>
       </div>
     )
@@ -125,4 +132,4 @@ const mapActionsToProps = {
   loginUser
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(Login)
+export default connect(mapStateToProps, mapActionsToProps)(withRouter(Login))

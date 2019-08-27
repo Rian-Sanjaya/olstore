@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 // const bcrypt = require('bcrypt')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
+const moment = require('moment')
 
 const SALT_I = 10
 require('dotenv').config()
@@ -42,7 +44,13 @@ const userSchema = mongoose.Schema({
   },
   token:{
     type:String
-  }  
+  },
+  resetToken:{
+      type:String
+  },
+  resetTokenExp:{
+      type:Number
+  },
 })
 
 // before save, hash /encrypt the password
@@ -71,6 +79,23 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
     if (err) return cb(err)
 
     cb(null, isMatch)
+  })
+}
+
+userSchema.methods.generateResetToken = function(cb) {
+  var user = this;
+
+  crypto.randomBytes(20,function(err,buffer){
+      var token = buffer.toString('hex');
+      var today = moment().startOf('day').valueOf();
+      var tomorrow = moment(today).endOf('day').valueOf();
+
+      user.resetToken = token;
+      user.resetTokenExp = tomorrow;
+      user.save(function(err, user){
+          if(err) return cb(err);
+          cb(null, user);
+      })
   })
 }
 

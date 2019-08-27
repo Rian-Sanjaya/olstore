@@ -244,6 +244,47 @@ app.get('/api/product/brands', (req, res) => {
 //             USERS
 //================================
 
+app.post('/api/users/reset_user', (req, res) => {
+  console.log('email: ', req.body.email)
+  User.findOne(
+    {'email': req.body.email},
+    (err, user) => {
+      user.generateResetToken( (err, user) => {
+        if (err) return res.json({ success: false, err })
+        
+        sendMail(user.email, user.name, null, 'reset_password', user)
+
+        return res.json({ success: true })
+      })
+    }
+  )
+})
+
+app.post('/api/users/reset_password',(req,res)=>{
+
+  var today = moment().startOf('day').valueOf();
+
+  User.findOne({
+      resetToken: req.body.resetToken,
+      resetTokenExp:{
+          $gte: today
+      }
+  },(err,user)=>{
+      if(!user) return res.json({success:false,message:'Sorry, token bad, generate a new one.'})
+  
+      user.password = req.body.password;
+      user.resetToken = '';
+      user.resetTokenExp= '';
+
+      user.save((err,doc)=>{
+          if(err) return res.json({success:false,err});
+          return res.status(200).json({
+              success: true
+          })
+      })
+  })
+})
+
 app.get('/api/users/auth', auth, (req, res) => {
   // console.log('isi req: ', req)
   res.status(200).json({
